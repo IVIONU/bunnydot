@@ -7,52 +7,54 @@ const GlobalStyle = createGlobalStyle`
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Pretendard', -apple-system, sans-serif; /* 폰트는 깔끔하게 */
+    font-family: 'Pretendard', -apple-system, sans-serif;
   }
   
   body {
-    background-color: navy; /* 배경은 남색 */
-    color: white; /* 글씨는 흰색 */
-    min-height: 100vh; /* 화면 꽉 채우기 */
+    background-color: navy;
+    color: white;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
-  /* 하얀 박스 투명하게 */
   #root, .App {
     background: transparent !important;
+    width: 100%;
   }
 
-  /* 메인 제목 작게 */
+  /* 1. 제목 없애기 (방해되는 제목 숨기기) */
   h1 {
-    font-size: 1.2rem; /* 제목도 아담하게 줄임 */
-    margin: 30px 0;
-    font-weight: 500;
-    text-align: center;
+    display: none; 
   }
 
-  /* 사진 상자 스타일 */
+  /* 2. 사진 비율 & 컴퓨터 전체화면 대응 */
   img {
-    max-width: 250px; /* 사진 가로 크기를 최대 250px로 제한 */
-    width: 60%;       /* 모바일에서는 화면 가로의 60% 차지 */
+    /* 큰 화면에서도 사진이 너무 커지거나 찢어지지 않게 가로 최대폭 제한 */
+    max-width: 200px; 
+    width: 50%;       /* 화면이 작을 땐 유동적으로 조절 */
     
-    /* ⭐ 여기가 비율 심폐소생술 포인트 ⭐ */
-    height: 350px;      /* 사진 세로 길이를 딱 고정 (맘에 드는 숫자로 고쳐도 됨) */
-    object-fit: cover;  /* 중요! 정해진 상자(height: 350px) 안에 원본 비율대로 '꽉 차게' 넣되, 남는 부분은 깔끔하게 자름 */
+    /* 세로 길이를 고정해서 큰 화면에서도 비율 유지 */
+    height: 280px;    
+    object-fit: cover; 
     
-    border-radius: 12px;
+    border-radius: 10px;
     margin: 0 auto;
     display: block;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.5);
   }
 
-  /* ⭐ 혜리의 핵심 요청: 사진 아래 이름 글씨 아주 작게 ⭐ */
+  /* 3. 글씨 크기 70% 이상 더 줄이기 */
   .name {
-    /* 기존 0.9rem에서 더 작은 단위인 'px'로 아주 작게 고정 */
-    font-size: 14px; /* 사진 가로폭의 5분의1 정도로 느껴질 만큼 아담하게 조절 */
+    /* 14px의 70% 수준인 10px 정도로 아주 아담하게 조절 */
+    font-size: 10px; 
     
-    margin: 15px 0 35px 0; /* 사진과의 간격 조절 */
+    margin: 10px 0 20px 0;
     text-align: center;
-    opacity: 0.8; /* 살짝 투명하게 해서 시선 강탈 안 하게 */
-    font-weight: 300; /* 글씨 두께도 얇게 해서 여리여리하게 */
+    opacity: 0.7;    /* 더 흐릿하게 해서 사진에만 집중되게 함 */
+    font-weight: 300;
+    letter-spacing: -0.5px; /* 자간을 줄여서 더 촘촘하고 세련되게 */
   }
 `;
 
