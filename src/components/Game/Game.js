@@ -66,6 +66,7 @@ const items = [
     name: "260227",
     src: require("../../img/bunnydot16.jpg")
   },
+  /*
     {
     name: "260225",
     src: require("../../img/bunnydot17.jpg")
@@ -90,6 +91,7 @@ const items = [
     name: "260306",
     src: require("../../img/bunnydot22.jpg")
   }
+*/
 ];
 
 const Game = () => {
