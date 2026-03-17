@@ -124,7 +124,8 @@ return (
     <FlexBox>
       {/* 사진이 1장일 때: 우승자 화면 출력 */}
       {displays.length === 1 ? (
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%' }}>
+        /* 여기에 WinnerContainer 클래스를 추가해서 CSS가 먹히게 했어! */
+        <div className="WinnerContainer" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%' }}>
           <div className="winner-label">BUNNYDOT</div>
           <div className="flex-1">
             <img className="food-img winner-img" src={displays[0].src} alt="winner" />
