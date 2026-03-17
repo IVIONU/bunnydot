@@ -22,44 +22,50 @@ const GlobalStyle = createGlobalStyle`
     color: white !important;
     display: flex;
     justify-content: center;
-    align-items: flex-start;
+    align-items: flex-start; 
     overflow-x: hidden;
   }
 
   .title { display: none !important; }
 
-  /* ⭐ 우승자 컨테이너: 이제 클래스가 연결되어 제대로 밀릴 거야! ⭐ */
+  /* ⭐ 우승자 컨테이너: 위치를 적당히(100px)로 조정 ⭐ */
   .WinnerContainer {
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 100%;
-    /* 전체를 화면 위에서 200px 내려서 시작 */
-    padding-top: 200px !important; 
-    background: transparent !important;
+    padding-top: 100px !important; /* 너무 내려가지 않게 적당히 조절 */
+    background: none !important; /* 배경색 아예 삭제 */
+    overflow: visible !important; /* 튀어나온 효과가 안 잘리게 */
   }
 
-  /* ⭐ BUNNYDOT 글씨: 사진 윗부분 가림 방지 ⭐ */
+  /* ⭐ BUNNYDOT 글씨: 배경 가림막 완전 제거 ⭐ */
   .winner-label {
-    background: transparent !important;
+    background: none !important; /* 배경색 없음 */
+    background-color: transparent !important; /* 투명 */
     font-size: 24px !important;
     font-weight: 800 !important;
     color: gold !important;
     letter-spacing: 5px !important;
-    /* 사진 모서리가 보이도록 아래 여백을 100px로 대폭 늘림 */
-    margin-bottom: 100px !important; 
+    margin-bottom: 40px !important; /* 사진과 겹치지 않게 거리 두기 */
     text-align: center;
+    z-index: 1 !important; /* 사진보다 뒤로 보냄 */
   }
 
+  /* 사진 디자인 유지 */
   .food-img {
     aspect-ratio: 3 / 4 !important; 
     width: auto !important;
     max-height: 55vh !important;
     object-fit: cover !important; 
-    border-radius: 12px !important;
+    border-radius: 12px !important; 
     margin: 0 auto !important;
     display: block !important;
     box-shadow: 0 4px 20px rgba(255, 255, 255, 0.1);
+    
+    /* ⭐ 사진이 글씨 영역에 가려지지 않게 앞으로 가져오기 ⭐ */
+    position: relative !important;
+    z-index: 10 !important; 
   }
 
   .winner-img {
@@ -76,10 +82,10 @@ const GlobalStyle = createGlobalStyle`
     margin-top: 15px;
   }
 
-  /* ⭐ RESTART 버튼: 혜리가 좋다고 한 10px 간격 유지 ⭐ */
+  /* RESTART 버튼 디자인 고수 */
   .restart-btn {
     margin-top: 10px !important; 
-    margin-bottom: 100px;
+    margin-bottom: 80px;
     padding: 10px 25px;
     background-color: transparent;
     color: white;
