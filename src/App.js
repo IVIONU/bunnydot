@@ -22,29 +22,31 @@ const GlobalStyle = createGlobalStyle`
     color: white !important;
     display: flex;
     justify-content: center;
-    align-items: flex-start; /* 콘텐츠를 상단부터 배치 */
+    /* 상단에서부터 배치를 시작해서 여백을 조절할 수 있게 함 */
+    align-items: flex-start; 
     overflow-x: hidden;
   }
 
   .title { display: none !important; }
 
-  /* ⭐ 우승자 컨테이너: 사진을 과감하게 아래로 밀어냄 ⭐ */
+  /* ⭐ 우승자 컨테이너: 여백을 더 과감하게! ⭐ */
   .WinnerContainer {
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 100%;
-    /* 상단 잘림 방지 + 사진 위치 하향 조절을 위해 여백 대폭 추가 */
-    margin-top: 280px !important; 
+    /* 위쪽 잘림 방지 + 사진 하향 조절 (숫자를 더 키웠어!) */
+    padding-top: 350px !important; 
   }
 
+  /* BUNNYDOT 글씨 위치 */
   .winner-label {
-    margin-top: 0 !important; 
     font-size: 24px !important;
     font-weight: 800 !important;
     color: gold !important;
     letter-spacing: 5px !important;
-    margin-bottom: 25px !important;
+    /* 사진과의 간격을 조금 더 줘서 사진이 안 겹치게 함 */
+    margin-bottom: 40px !important; 
     text-align: center;
   }
 
@@ -53,6 +55,7 @@ const GlobalStyle = createGlobalStyle`
     width: auto !important;
     max-height: 55vh !important;
     object-fit: cover !important; 
+    /* 둥근 모서리가 잘리지 않게 padding-top으로 공간을 확보했어 */
     border-radius: 12px !important;
     margin: 0 auto !important;
     display: block !important;
@@ -70,14 +73,14 @@ const GlobalStyle = createGlobalStyle`
     font-size: 12px !important;
     color: white !important;
     text-align: center;
-    margin-top: 10px;
+    margin-top: 15px;
   }
 
-  /* ⭐ 다시하기 버튼: 사진 쪽으로 과감하게 올림 ⭐ */
+  /* ⭐ RESTART 버튼: 사진 쪽으로 바짝 붙여 올림 ⭐ */
   .restart-btn {
-    /* 사진(이름)과의 간격을 좁혀서 더 위로 보이게 조절 */
-    margin-top: 20px !important; 
-    margin-bottom: 50px;
+    /* 사진 이름 바로 밑으로 오도록 간격을 최소화했어 */
+    margin-top: 10px !important; 
+    margin-bottom: 100px; /* 아래쪽 여백은 넉넉히 */
     
     padding: 10px 25px;
     background-color: transparent;
