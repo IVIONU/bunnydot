@@ -8,6 +8,10 @@ const GlobalStyle = createGlobalStyle`
     padding: 0;
     box-sizing:border-box;
   }
+  body {
+    background-color: navy;
+    color: white;
+  }
 `;
 
 function App() {
