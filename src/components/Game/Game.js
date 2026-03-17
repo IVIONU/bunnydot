@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { FlexBox } from "./style";
+import React, { useState, useEffect } from 'react';
+import styled from 'styled-components';
 
 const items = [
   {
@@ -66,7 +66,7 @@ const items = [
     name: "260227",
     src: require("../../img/bunnydot16.jpg")
   },
-  /*
+
     {
     name: "260225",
     src: require("../../img/bunnydot17.jpg")
@@ -91,40 +91,48 @@ const items = [
     name: "260306",
     src: require("../../img/bunnydot22.jpg")
   }
-*/
+
 ];
 
+const shuffleAndPick = (array, count) => {
+  return [...array]
+    .sort(() => Math.random() - 0.5) // 마구 섞기
+    .slice(0, count); // 앞에서부터 16장만 자르기
+};
+
 const Game = () => {
-  const [foods, setFoods] = useState([]);
-  const [displays, setDisplays] = useState([]);
+  // 처음 시작할 때 딱 16장만 랜덤으로 뽑아서 들고 시작!
+  const [items, setItems] = useState(() => shuffleAndPick(allItems, 16));
   const [winners, setWinners] = useState([]);
+  const [displays, setDisplays] = useState([]);
+
+  // 초기 세팅: 처음 뽑힌 16장 중 첫 2장을 화면에 보여줌
   useEffect(() => {
-    items.sort(() => Math.random() - 0.5);
-    setFoods(items);
-    setDisplays([items[0], items[1]]);
+    if (items.length >= 2) {
+      setDisplays([items[0], items[1]]);
+    }
   }, []);
 
-  const clickHandler = food => () => {
-    if (foods.length <= 2) {
+  const clickHandler = (item) => () => {
+    if (items.length <= 2) {
       if (winners.length === 0) {
-        setDisplays([food]);
+        setDisplays([item]); // 최종 우승자 결정!
       } else {
-        let updatedFood = [...winners, food];
-        setFoods(updatedFood);
-        setDisplays([updatedFood[0], updatedFood[1]]);
+        const updatedWinners = [...winners, item];
+        setItems(updatedWinners);
+        setDisplays([updatedWinners[0], updatedWinners[1]]);
         setWinners([]);
       }
-    } else if (foods.length > 2) {
-      setWinners([...winners, food]);
-      setDisplays([foods[2], foods[3]]);
-      setFoods(foods.slice(2));
+    } else if (items.length > 2) {
+      setWinners([...winners, item]);
+      setItems(items.slice(2));
+      setDisplays([items[2], items[3]]);
     }
   };
 return (
     <FlexBox>
-      {/* 사진이 1장일 때: 우승자 화면 출력 */}
+      {/* 사진이 1장일 때: 우승자 화면 (혜리가 만든 완벽한 레이아웃) */}
       {displays.length === 1 ? (
-        /* 여기에 WinnerContainer 클래스를 추가해서 CSS가 먹히게 했어! */
         <div className="WinnerContainer" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%' }}>
           <div className="winner-label">BUNNYDOT</div>
           <div className="flex-1">
@@ -136,12 +144,12 @@ return (
           </button>
         </div>
       ) : (
-        /* 사진이 2장일 때: 대결 화면 출력 */
+        /* 사진이 2장일 때: 대결 화면 */
         <>
           <h1 className="title">25-26 ETERNITY 버니닷꾸</h1>
           {displays.map(d => (
             <div className="flex-1" key={d.name} onClick={clickHandler(d)}>
-              <img className="food-img" src={d.src} />
+              <img className="food-img" src={d.src} alt={d.name} />
               <div className="name">{d.name}</div>
             </div>
           ))}
@@ -152,3 +160,12 @@ return (
 };
 
 export default Game;
+
+// 스타일을 위한 FlexBox (기본 정의가 없다면 추가해줘!)
+const FlexBox = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+`;
