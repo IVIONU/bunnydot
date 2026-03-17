@@ -120,17 +120,35 @@ const Game = () => {
       setFoods(foods.slice(2));
     }
   };
-  return (
+return (
     <FlexBox>
-      <h1 className="title">25-26 ETERNITY 버니닷꾸</h1>
-      {displays.map(d => {
-        return (
-          <div className="flex-1" key={d.name} onClick={clickHandler(d)}>
-            <img className="food-img" src={d.src} />
-            <div className="name">{d.name}</div>
+      {/* 사진이 1장 남았을 때 (우승자 화면) */}
+      {displays.length === 1 ? (
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+          <div className="winner-label">BUNNYDOT</div>
+          <div className="flex-1">
+            {/* 우승자 이미지에는 winner-img 클래스를 추가로 붙여줌 */}
+            <img className="food-img winner-img" src={displays[0].src} alt="winner" />
+            <div className="name">{displays[0].name}</div>
           </div>
-        );
-      })}
+          <button className="restart-btn" onClick={() => window.location.reload()}>
+            RESTART
+          </button>
+        </div>
+      ) : (
+        /* 사진이 2장일 때 (게임 진행 화면) */
+        <>
+          <h1 className="title">25-26 ETERNITY 버니닷꾸</h1>
+          {displays.map(d => {
+            return (
+              <div className="flex-1" key={d.name} onClick={clickHandler(d)}>
+                <img className="food-img" src={d.src} />
+                <div className="name">{d.name}</div>
+              </div>
+            );
+          })}
+        </>
+      )}
     </FlexBox>
   );
 };
