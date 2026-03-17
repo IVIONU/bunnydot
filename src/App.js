@@ -22,31 +22,30 @@ const GlobalStyle = createGlobalStyle`
     color: white !important;
     display: flex;
     justify-content: center;
-    /* 상단에서부터 배치를 시작해서 여백을 조절할 수 있게 함 */
-    align-items: flex-start; 
+    align-items: flex-start; /* 상단부터 차곡차곡 쌓기 */
     overflow-x: hidden;
   }
 
   .title { display: none !important; }
 
-  /* ⭐ 우승자 컨테이너: 여백을 더 과감하게! ⭐ */
+  /* ⭐ 우승자 컨테이너: 여백 대폭격 (600px!) ⭐ */
   .WinnerContainer {
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 100%;
-    /* 위쪽 잘림 방지 + 사진 하향 조절 (숫자를 더 키웠어!) */
-    padding-top: 350px !important; 
+    /* 윗부분이 절대 안 잘리게 아예 화면 중간까지 밀어버림 */
+    padding-top: 600px !important; 
   }
 
-  /* BUNNYDOT 글씨 위치 */
+  /* BUNNYDOT 글씨: 사진이랑 절대 안 겹치게 여백 추가 */
   .winner-label {
     font-size: 24px !important;
     font-weight: 800 !important;
     color: gold !important;
     letter-spacing: 5px !important;
-    /* 사진과의 간격을 조금 더 줘서 사진이 안 겹치게 함 */
-    margin-bottom: 40px !important; 
+    /* 사진 윗부분이랑 거리를 더 둬서 잘림 방지 */
+    margin-bottom: 80px !important; 
     text-align: center;
   }
 
@@ -55,8 +54,7 @@ const GlobalStyle = createGlobalStyle`
     width: auto !important;
     max-height: 55vh !important;
     object-fit: cover !important; 
-    /* 둥근 모서리가 잘리지 않게 padding-top으로 공간을 확보했어 */
-    border-radius: 12px !important;
+    border-radius: 12px !important; /* 드디어 보일 둥근 모서리 */
     margin: 0 auto !important;
     display: block !important;
     box-shadow: 0 4px 20px rgba(255, 255, 255, 0.1);
@@ -76,11 +74,10 @@ const GlobalStyle = createGlobalStyle`
     margin-top: 15px;
   }
 
-  /* ⭐ RESTART 버튼: 사진 쪽으로 바짝 붙여 올림 ⭐ */
+  /* ⭐ RESTART 버튼: 혜리가 좋다고 한 위치 그대로 (10px 유지) ⭐ */
   .restart-btn {
-    /* 사진 이름 바로 밑으로 오도록 간격을 최소화했어 */
     margin-top: 10px !important; 
-    margin-bottom: 100px; /* 아래쪽 여백은 넉넉히 */
+    margin-bottom: 150px; /* 아래쪽 여백은 넉넉하게 */
     
     padding: 10px 25px;
     background-color: transparent;
