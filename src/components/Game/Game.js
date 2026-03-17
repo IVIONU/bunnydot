@@ -161,10 +161,21 @@ return (
 
 export default Game;
 
+/* Game.js 맨 아래 FlexBox 부분을 이걸로 교체해! */
 const FlexBox = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
   height: 100%;
+  
+  /* 기본은 가로(Row) 배치 (PC 화면) */
+  flex-direction: row;
+
+  /* ⭐ 폰으로 접속했을 때 (화면 폭이 768px 이하일 때) ⭐ */
+  @media screen and (max-width: 768px) {
+    flex-direction: column; /* 세로로 쌓기 */
+    gap: 30px; /* 사진 사이의 위아래 간격 */
+    padding-top: 50px; /* 폰에서 너무 천장에 붙지 않게 여백 */
+  }
 `;
