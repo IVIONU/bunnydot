@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import styled from 'styled-components';
 
 const sourceItems = [
@@ -99,41 +99,40 @@ const shuffleAndPick = (array, count) => {
 };
 
 const Game = () => {
-  // 혜리가 유지하고 싶어 하는 foods 변수명 사용
+  // 상태 관리: foods로 이름 통일
   const [foods, setFoods] = useState([]); 
   const [winners, setWinners] = useState([]);
   const [displays, setDisplays] = useState([]);
 
-  // 초기 세팅: 16장 랜덤 추출 및 시작
+  // 게임 초기화
   useEffect(() => {
-    const randomSixteen = shuffleAndPick(sourceItems, 16);
-    setFoods(randomSixteen);
-    setDisplays([randomSixteen[0], randomSixteen[1]]);
+    const initialSelection = shuffleAndPick(sourceItems, 16);
+    setFoods(initialSelection);
+    setDisplays([initialSelection[0], initialSelection[1]]);
   }, []);
 
-  const clickHandler = (selectedFood) => () => {
+  // 클릭 이벤트 핸들러
+  const clickHandler = (selected) => () => {
     if (foods.length <= 2) {
-      // 결승전인 경우
       if (winners.length === 0) {
-        setDisplays([selectedFood]); // 최종 우승자
+        setDisplays([selected]); // 최종 우승
       } else {
-        const nextRound = [...winners, selectedFood];
+        const nextRound = [...winners, selected];
         setFoods(nextRound);
         setDisplays([nextRound[0], nextRound[1]]);
         setWinners([]);
       }
     } else {
-      // 일반 대결 진행
-      setWinners([...winners, selectedFood]);
-      const remaining = foods.slice(2);
-      setFoods(remaining);
-      setDisplays([remaining[0], remaining[1]]);
+      setWinners([...winners, selected]);
+      const nextBatch = foods.slice(2);
+      setFoods(nextBatch);
+      setDisplays([nextBatch[0], nextBatch[1]]);
     }
   };
 return (
     <FlexBox>
       {displays.length === 1 ? (
-        /* 우승자 화면 (WinnerContainer 이름표 필수!) */
+        /* 우승자 화면 */
         <div className="WinnerContainer">
           <div className="winner-label">BUNNYDOT</div>
           <div className="flex-1">
