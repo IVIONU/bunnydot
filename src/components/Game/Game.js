@@ -134,7 +134,7 @@ return (
       {displays.length === 1 ? (
         /* 우승자 화면 */
         <div className="WinnerContainer">
-          <div className="winner-label">BUNNYDOT</div>
+          <div className="winner-label">BUNNYDOT🐰</div>
           <div className="flex-1">
             <img className="food-img winner-img" src={displays[0].src} alt="winner" />
             <div className="name">{displays[0].name}</div>
