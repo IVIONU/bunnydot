@@ -116,7 +116,7 @@ const Game = () => {
   const clickHandler = (selected) => () => {
     if (foods.length <= 2) {
       if (winners.length === 0) {
-        const shape1 = confetti.shapeFromText({ text: '☄️', }); // 이모지 1
+        const shape1 = confetti.shapeFromText({ text: '🚀', }); // 이모지 1
         const shape2 = confetti.shapeFromText({ text: '✨', }); // 이모지 2
         const shape3 = confetti.shapeFromText({ text: '🪐', }); // 이모지 3
 
@@ -142,13 +142,18 @@ const Game = () => {
       setDisplays([nextBatch[0], nextBatch[1]]);
     }
   };
-const totalInRound = foods.length + winners.length;
+/* return 바로 위에 들어갈 완벽한 계산 로직 */
+const totalInRound = foods.length + (winners.length * 2); // ⭐ 여기가 핵심!
 const currentMatch = winners.length + 1;
 const totalMatches = totalInRound / 2;
 const progressPercent = (currentMatch / totalMatches) * 100;
 
-let roundName = `${totalInRound}강`;
-if (totalInRound === 2) roundName = "FINAL";
+/* 혜리 맞춤형 텍스트 변환기 */
+let roundText = "";
+if (totalInRound === 16) roundText = `ROUND 1 (${currentMatch}/${totalMatches})`;
+else if (totalInRound === 8) roundText = `ROUND 2 (${currentMatch}/${totalMatches})`;
+else if (totalInRound === 4) roundText = `ROUND 3 (${currentMatch}/${totalMatches})`;
+else if (totalInRound === 2) roundText = "FINAL";
 
 return (
   <FlexBox style={{ flexDirection: displays.length === 1 ? 'row' : 'column' }}>
@@ -168,7 +173,7 @@ return (
         {/* 1. 최상단 진행 상황 표시 구역 */}
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%', marginTop: '20px' }}>
           <div style={{ fontSize: '16px', fontWeight: 'bold', marginBottom: '8px', color: '#555' }}>
-            {roundName} ({currentMatch} / {totalMatches})
+            {roundText} {/* ⭐ 여기를 괄호 없이 변수 하나로 깔끔하게! */}
           </div>
           <ProgressBar>
             <ProgressFill percent={progressPercent} />
