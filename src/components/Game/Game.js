@@ -125,8 +125,8 @@ const Game = () => {
         spread: 80,
         origin: { y: 0.6 },
         shapes: [shape1, shape2, shape3],
-        scalar: 4,
-        ticks: 200
+        scalar: 3,
+        ticks: 150
 });
         setDisplays([selected]); // 최종 우승
       } else {
@@ -142,6 +142,13 @@ const Game = () => {
       setDisplays([nextBatch[0], nextBatch[1]]);
     }
   };
+const totalInRound = foods.length + winners.length; // 이번 라운드 총 인원 (16, 8, 4, 2)
+const currentMatch = winners.length + 1; // 현재 몇 번째 대결인지
+const totalMatches = totalInRound / 2; // 이번 라운드 총 대결 수
+
+
+let roundName = `${totalInRound}강`;
+if (totalInRound === 2) roundName = "FINAL";
 return (
     <FlexBox>
       {displays.length === 1 ? (
@@ -159,7 +166,19 @@ return (
       ) : (
         /* 대결 화면 */
         <>
+          {/* 진행 상황 및 게이지 레이아웃 */}
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%', marginTop: '20px' }}>
+            <div className="round-progress" style={{ fontSize: '18px', fontWeight: 'bold', marginBottom: '10px', color: '#555' }}>
+              {roundName} ({currentMatch} / {totalMatches})
+            </div>
+            {/* 게이지 바 */}
+            <ProgressBar>
+              <ProgressFill percent={progressPercent} />
+            </ProgressBar>
+          </div>
+
           <h1 className="title">25-26 ETERNITY 버니닷꾸</h1>
+          
           {displays.map(d => (
             <div className="flex-1" key={d.name} onClick={clickHandler(d)}>
               <img className="food-img" src={d.src} alt={d.name} />
@@ -174,7 +193,8 @@ return (
 
 export default Game;
 
-/* Game.js 맨 아래 FlexBox 부분을 이걸로 교체해! */
+/* Game.js 맨 아래 스타일 부분에 이대로 붙여넣으렴! */
+
 const FlexBox = styled.div`
   display: flex;
   justify-content: center;
@@ -191,4 +211,23 @@ const FlexBox = styled.div`
     gap: 30px; /* 사진 사이의 위아래 간격 */
     padding-top: 50px; /* 폰에서 너무 천장에 붙지 않게 여백 */
   }
+`;
+
+const ProgressBar = styled.div`
+  width: 80%;
+  max-width: 400px;
+  height: 10px;
+  background-color: #e0e0e0;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  overflow: hidden; /* 넘치는 막대기 방지 */
+`;
+
+/* 안쪽 게이지 (차오르는 금색 막대기) */
+const ProgressFill = styled.div`
+  /* props로 받은 percent 숫자에 따라 너비가 실시간으로 변해! */
+  width: ${props => props.percent}%; 
+  height: 100%;
+  background-color: #ffc107; /* 버니닷꾸와 어울리는 금색/노란색 */
+  transition: width 0.3s ease-in-out; /* 클릭할 때마다 부드럽게 슥~ 차오름 */
 `;
