@@ -144,8 +144,9 @@ const Game = () => {
   };
 const totalInRound = foods.length + winners.length; // 이번 라운드 총 인원 (16, 8, 4, 2)
 const currentMatch = winners.length + 1; // 현재 몇 번째 대결인지
-const totalMatches = totalInRound / 2; // 이번 라운드 총 대결 수
+const totalMatches = Math.floor(totalInRound / 2);
 
+const progressPercent = (currentMatch / totalMatches) * 100;
 
 let roundName = `${totalInRound}강`;
 if (totalInRound === 2) roundName = "FINAL";
