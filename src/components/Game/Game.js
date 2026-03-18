@@ -116,7 +116,7 @@ const Game = () => {
   const clickHandler = (selected) => () => {
     if (foods.length <= 2) {
       if (winners.length === 0) {
-        const shape1 = confetti.shapeFromText({ text: '🐰', }); // 이모지 1
+        const shape1 = confetti.shapeFromText({ text: '☄️', }); // 이모지 1
         const shape2 = confetti.shapeFromText({ text: '✨', }); // 이모지 2
         const shape3 = confetti.shapeFromText({ text: '🪐', }); // 이모지 3
 
@@ -142,53 +142,53 @@ const Game = () => {
       setDisplays([nextBatch[0], nextBatch[1]]);
     }
   };
-const totalInRound = foods.length + winners.length; // 이번 라운드 총 인원 (16, 8, 4, 2)
-const currentMatch = winners.length + 1; // 현재 몇 번째 대결인지
-const totalMatches = Math.floor(totalInRound / 2);
-
+const totalInRound = foods.length + winners.length;
+const currentMatch = winners.length + 1;
+const totalMatches = totalInRound / 2;
 const progressPercent = (currentMatch / totalMatches) * 100;
 
 let roundName = `${totalInRound}강`;
 if (totalInRound === 2) roundName = "FINAL";
-return (
-    <FlexBox>
-      {displays.length === 1 ? (
-        /* 우승자 화면 */
-        <div className="WinnerContainer">
-          <div className="winner-label">BUNNYDOT🐰</div>
-          <div className="flex-1">
-            <img className="food-img winner-img" src={displays[0].src} alt="winner" />
-            <div className="name">{displays[0].name}</div>
-          </div>
-          <button className="restart-btn" onClick={() => window.location.reload()}>
-            RESTART
-          </button>
-        </div>
-      ) : (
-        /* 대결 화면 */
-        <>
-          {/* 진행 상황 및 게이지 레이아웃 */}
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%', marginTop: '20px' }}>
-            <div className="round-progress" style={{ fontSize: '18px', fontWeight: 'bold', marginBottom: '10px', color: '#555' }}>
-              {roundName} ({currentMatch} / {totalMatches})
-            </div>
-            {/* 게이지 바 */}
-            <ProgressBar>
-              <ProgressFill percent={progressPercent} />
-            </ProgressBar>
-          </div>
 
-          <h1 className="title">25-26 ETERNITY 버니닷꾸</h1>
-          
+return (
+  <FlexBox style={{ flexDirection: displays.length === 1 ? 'row' : 'column' }}>
+    {displays.length === 1 ? (
+      /* 우승자 화면 (기존과 동일) */
+      <div className="WinnerContainer">
+        <div className="winner-label">BUNNYDOT🐰</div>
+        <div className="flex-1">
+          <img className="food-img winner-img" src={displays[0].src} alt="winner" />
+          <div className="name">{displays[0].name}</div>
+        </div>
+        <button className="restart-btn" onClick={() => window.location.reload()}>RESTART</button>
+      </div>
+    ) : (
+      /* 대결 화면 */
+      <>
+        {/* 1. 최상단 진행 상황 표시 구역 */}
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%', marginTop: '20px' }}>
+          <div style={{ fontSize: '16px', fontWeight: 'bold', marginBottom: '8px', color: '#555' }}>
+            {roundName} ({currentMatch} / {totalMatches})
+          </div>
+          <ProgressBar>
+            <ProgressFill percent={progressPercent} />
+          </ProgressBar>
+        </div>
+
+        <h1 className="title">25-26 ETERNITY 버니닷꾸</h1>
+        
+        {/* 2. 사진 대결 구역 (가로 배치를 위해 묶음) */}
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', flexWrap: 'wrap' }}>
           {displays.map(d => (
             <div className="flex-1" key={d.name} onClick={clickHandler(d)}>
               <img className="food-img" src={d.src} alt={d.name} />
               <div className="name">{d.name}</div>
             </div>
           ))}
-        </>
-      )}
-    </FlexBox>
+        </div>
+      </>
+    )}
+  </FlexBox>
   );
 };
 
@@ -215,20 +215,19 @@ const FlexBox = styled.div`
 `;
 
 const ProgressBar = styled.div`
-  width: 80%;
-  max-width: 400px;
-  height: 10px;
+  width: 90%; /* 가로로 더 길게 */
+  max-width: 600px;
+  height: 6px; /* 더 얇게 */
   background-color: #e0e0e0;
-  border-radius: 5px;
-  margin-bottom: 20px;
-  overflow: hidden; /* 넘치는 막대기 방지 */
+  border-radius: 3px;
+  margin-bottom: 30px;
+  overflow: hidden;
 `;
 
-/* 안쪽 게이지 (차오르는 금색 막대기) */
+/* ProgressFill: 차오르는 부분 */
 const ProgressFill = styled.div`
-  /* props로 받은 percent 숫자에 따라 너비가 실시간으로 변해! */
-  width: ${props => props.percent}%; 
+  width: ${props => props.percent}%;
   height: 100%;
-  background-color: #ffc107; /* 버니닷꾸와 어울리는 금색/노란색 */
-  transition: width 0.3s ease-in-out; /* 클릭할 때마다 부드럽게 슥~ 차오름 */
+  background-color: #ffc107;
+  transition: width 0.3s ease-in-out;
 `;
