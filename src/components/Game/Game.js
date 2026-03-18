@@ -116,7 +116,7 @@ const Game = () => {
   const clickHandler = (selected) => () => {
     if (foods.length <= 2) {
       if (winners.length === 0) {
-        const shape1 = confetti.shapeFromText({ text: '🚀', }); // 이모지 1
+        const shape1 = confetti.shapeFromText({ text: '🐰', }); // 이모지 1
         const shape2 = confetti.shapeFromText({ text: '✨', }); // 이모지 2
         const shape3 = confetti.shapeFromText({ text: '🪐', }); // 이모지 3
 
@@ -160,7 +160,7 @@ return (
     {displays.length === 1 ? (
       /* 우승자 화면 (기존과 동일) */
       <div className="WinnerContainer">
-        <div className="winner-label">BUNNYDOT🐰</div>
+        <div className="winner-label">BUNNYDOT🪐</div>
         <div className="flex-1">
           <img className="food-img winner-img" src={displays[0].src} alt="winner" />
           <div className="name">{displays[0].name}</div>
