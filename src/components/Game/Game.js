@@ -116,15 +116,17 @@ const Game = () => {
   const clickHandler = (selected) => () => {
     if (foods.length <= 2) {
       if (winners.length === 0) {
-        const shape1 = confetti.shapeFromText({ text: '🐰', scalar: 3 }); // 이모지 1
-        const shape2 = confetti.shapeFromText({ text: '✨', scalar: 3 }); // 이모지 2
-        const shape3 = confetti.shapeFromText({ text: '🪐', scalar: 3 }); // 이모지 3
+        const shape1 = confetti.shapeFromText({ text: '🐰', }); // 이모지 1
+        const shape2 = confetti.shapeFromText({ text: '✨', }); // 이모지 2
+        const shape3 = confetti.shapeFromText({ text: '🪐', }); // 이모지 3
 
         confetti({
-        particleCount: 100,
+        particleCount: 150,
         spread: 80,
         origin: { y: 0.6 },
-        shapes: [shape1, shape2, shape3], // 조합한 이모지들
+        shapes: [shape1, shape2, shape3],
+        scalar: 4,
+        ticks: 200
 });
         setDisplays([selected]); // 최종 우승
       } else {
