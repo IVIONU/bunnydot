@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from 'styled-components';
+import confetti from 'canvas-confetti';
 
 const sourceItems = [
   {
@@ -115,6 +116,7 @@ const Game = () => {
   const clickHandler = (selected) => () => {
     if (foods.length <= 2) {
       if (winners.length === 0) {
+        confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
         setDisplays([selected]); // 최종 우승
       } else {
         const nextRound = [...winners, selected];
