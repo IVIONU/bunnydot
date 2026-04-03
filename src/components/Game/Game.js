@@ -91,8 +91,11 @@ const sourceItems = [
       {
     name: "260306",
     src: require("../../img/bunnydot22.jpg")
+  },
+      {
+    name: "260310",
+    src: require("../../img/bunnydot23.jpg")  
   }
-
 ];
 
 const shuffleAndPick = (array, count) => {
